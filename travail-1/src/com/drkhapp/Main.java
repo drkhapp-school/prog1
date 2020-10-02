@@ -19,9 +19,9 @@ public class Main {
         int limit; // limit
         int essaie; // la tentative
         boolean reussi; // si la personne a reussi
-
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
+
         min = 0;
         max = 100;
         myst = rand.nextInt(101) - 1;
@@ -47,6 +47,8 @@ public class Main {
             System.out.println("Féliciations! Le nombre était: " + myst);
         else
             System.out.println("Le nombre mystère était: " + myst);
+
+        scan.close();
     }
 
 }
