@@ -19,7 +19,7 @@ public class Main {
         int nbMyst; // nombre à trouver
         int nbLimit; // nombre de tentative
         int nbEssaie; // tentative du joueur
-        boolean reussi; // si la personne a réussi
+        boolean reussi; // si la personne a réussi;
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
 
@@ -53,10 +53,12 @@ public class Main {
                 System.out.println("Rentrer un entier.");
                 scan.next();
             }
-        } while (nbLimit >= 5);
+        } while (nbLimit <= 5);
+
+        System.out.println("\n--------------------------------");
 
         if (reussi)
-            System.out.println("Félicitation!");
+            System.out.println("Félicitation! Le nombre était: " + nbMyst);
         else
             System.out.println("Désolé! Le nombre était: " + nbMyst);
 
