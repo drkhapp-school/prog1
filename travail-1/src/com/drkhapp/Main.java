@@ -18,7 +18,7 @@ public class Main {
         int myst; // nombre à trouver
         int limit; // nombre de tentative
         int essaie; // tentative du joueur
-        boolean reussi; // si la personne a réussi;
+        boolean reussi; // si la personne a réussi
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
 
