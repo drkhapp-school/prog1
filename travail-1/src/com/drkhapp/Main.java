@@ -8,8 +8,7 @@ import java.util.Scanner;
  * Objectif: Un jeu de nombre mystère consiste à trouver un nombre entre 1 et
  * 99, sélectionné au hasard, selon un nombre d’essais limités à cinq.
  *
- * @author Jean-Philippe Miguel-Gagnon
- * Session A2020
+ * @author Jean-Philippe Miguel-Gagnon Session A2020
  */
 public class Main {
 
@@ -19,15 +18,14 @@ public class Main {
         int myst; // nombre à trouver
         int limit; // nombre de tentative
         int essaie; // tentative du joueur
-        boolean reussi; // si la personne a réussi
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
 
         min = 0;
         max = 100;
-        limit = 1;
         myst = rand.nextInt(99) + 1;
-        reussi = false;
+        limit = 1;
+        essaie = 0;
 
         System.out.println("--------------------------------");
         System.out.println("Trouver un nombre entre 1 et 99.");
@@ -43,19 +41,17 @@ public class Main {
                     min = essaie;
                 else if (essaie > myst)
                     max = essaie;
-                else
-                    reussi = true;
 
                 limit++;
             } catch (InputMismatchException e) {
                 System.out.println("Rentrer un entier.");
                 scan.next();
             }
-        } while (limit <= 5 && !reussi);
+        } while (limit <= 5 && essaie != myst);
 
         System.out.println("\n--------------------------------");
 
-        if (reussi)
+        if (essaie == myst)
             System.out.println("Félicitation! Le nombre était: " + myst);
         else
             System.out.println("Désolé! Le nombre était: " + myst);
