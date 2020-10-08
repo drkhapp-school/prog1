@@ -4,14 +4,15 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Objectif: Un jeu de nombre mystère consiste à trouver un nombre entre 1 et
+ * 99, sélectionné au hasard, selon un nombre d’essais limités à cinq.
+ *
+ * @author Jean-Philippe Miguel-Gagnon
+ * Session A2020
+ */
 public class Main {
-    /**
-     * Objectif: Un jeu de nombre mystère consiste à trouver un nombre entre 1 et
-     * 99, sélectionné au hasard, selon un nombre d’essais limités à cinq.
-     *
-     * @author Jean-Philippe Miguel-Gagnon
-     * Session A2020
-     */
+
     public static void main(String[] args) {
         int min; // plus petit nombre
         int max; // plus gros nombre
