@@ -42,17 +42,15 @@ public class Main {
                     min = essaie;
                 else if (essaie > myst)
                     max = essaie;
-                else {
+                else
                     reussi = true;
-                    break;
-                }
 
                 limit++;
             } catch (InputMismatchException e) {
                 System.out.println("Rentrer un entier.");
                 scan.next();
             }
-        } while (limit <= 5);
+        } while (limit <= 5 && !reussi);
 
         System.out.println("\n--------------------------------");
 
