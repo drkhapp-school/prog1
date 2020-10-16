@@ -1,15 +1,16 @@
+/**
+ * Objectif: Un jeu de nombre mystère consiste à trouver un nombre entre 1 et
+ * 99, sélectionné au hasard, selon un nombre d’essais limités à cinq.
+ *
+ * @author Jean-Philippe Miguel-Gagnon
+ * Session A2020
+ */
 package com.drkhapp;
 
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Objectif: Un jeu de nombre mystère consiste à trouver un nombre entre 1 et
- * 99, sélectionné au hasard, selon un nombre d’essais limités à cinq.
- *
- * @author Jean-Philippe Miguel-Gagnon Session A2020
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -49,13 +50,12 @@ public class Main {
             }
         } while (limit <= 5 && essaie != myst);
 
+        scan.close();
         System.out.println("\n--------------------------------");
 
         if (essaie == myst)
             System.out.println("Félicitation! Le nombre était: " + myst);
         else
             System.out.println("Désolé! Le nombre était: " + myst);
-
-        scan.close();
     }
 }
