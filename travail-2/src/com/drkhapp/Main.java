@@ -1,5 +1,6 @@
 package com.drkhapp;
 
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -7,9 +8,9 @@ import java.util.StringJoiner;
 
 public class Main {
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m"; // text blanc
+    public static final String ANSI_RED = "\u001B[31m"; // text rouge
+    public static final String ANSI_BLUE = "\u001B[34m"; // text bleu
 
     /**
      * Demande au joueur une nombre entre 2 et 12
@@ -46,7 +47,7 @@ public class Main {
      * Ajoute un int dans un tableau
      *
      * @param tab le tableau qu'on ajoute à
-     * @param i   l'int qu'on ajoute
+     * @param i   le int qu'on ajoute
      * @return le tableau avec l'élément ajoutée
      */
     public static int[] addElemTableau(int[] tab, int i) {
@@ -79,6 +80,12 @@ public class Main {
         return stats.toString();
     }
 
+    /**
+     * Crée une moyenne avec tous les int d'un tableau
+     *
+     * @param tab le tableau à évaluer
+     * @return double contenant la moyenne
+     */
     public static double moyenneTableau(int[] tab) {
         double moy = 0; // la moyenne à retourner
 
@@ -116,6 +123,18 @@ public class Main {
         } while (!valid);
 
         return status;
+    }
+
+    /**
+     * Génère un pourcentage avec un nombre
+     *
+     * @param d le nombre à évaluer
+     * @param i ce que 100% vaut
+     * @return string contenant le pourcentage
+     */
+    public static String enPourcentage(double d, int i) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(d / i * 100) + "%";
     }
 
     public static void main(String[] args) {
@@ -176,7 +195,7 @@ public class Main {
             System.out.println(ANSI_BLUE + "Nombre de parties gagnées: " + partieWin);
             System.out.println(ANSI_BLUE + "Nombre de parties perdues: " + partieLoss);
             System.out.println(ANSI_BLUE + "Résultat de toutes les parties jouées: " + statsTableau(tabResult));
-            System.out.println(ANSI_BLUE + "Moyenne des résultats: " + moyenneTableau(tabResult) + "\n");
+            System.out.println(ANSI_BLUE + "Moyenne des résultats: " + enPourcentage(moyenneTableau(tabResult), 10) + "\n");
 
             enJeu = validerRejouer();
         } while (enJeu);
