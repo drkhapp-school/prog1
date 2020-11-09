@@ -1,3 +1,9 @@
+/**
+ * Objectif : TP2 qui consiste à créer un jeu de de multiplication qui permet au joueur de choisir une table de 2 à 12 (2 et 12 sont inclus) et detenter de trouver la réponse aux dix expressions générées aléatoirement par le programme.]
+ *
+ * @author : Jean-Philippe Miguel-Gagnon
+ * Automne 2020
+ */
 package com.drkhapp;
 
 import java.text.DecimalFormat;
@@ -8,9 +14,9 @@ import java.util.StringJoiner;
 
 public class Main {
 
-    public static final String ANSI_RESET = "\u001B[0m"; // text blanc
-    public static final String ANSI_RED = "\u001B[31m"; // text rouge
-    public static final String ANSI_BLUE = "\u001B[34m"; // text bleu
+    public static final String RESET = "\u001B[0m"; // text blanc
+    public static final String RED = "\u001B[31m"; // text rouge
+    public static final String BLUE = "\u001B[34m"; // text bleu
 
     /**
      * Demande au joueur une nombre entre 2 et 12
@@ -19,16 +25,21 @@ public class Main {
      */
     public static int choisirTable() {
         int i = 0; // table à retourner
+        boolean valid = false; // si l'entrée est valid
         Scanner scan = new Scanner(System.in);
 
         do {
             try {
-                System.out.print(ANSI_RESET + "-> Choisir une table (2 à 12): ");
+                System.out.print(RESET + "-> Choisir une table (2 à 12): ");
                 i = scan.nextInt();
+
+                if (i >= 2 && i <= 12) {
+                    valid = true;
+                }
             } catch (InputMismatchException e) {
                 scan.next();
             }
-        } while (i > 12 || i < 2);
+        } while (!valid);
 
         return i;
     }
@@ -40,13 +51,13 @@ public class Main {
      */
     public static int genererNbAleatoire() {
         Random rand = new Random();
-        return rand.nextInt(10) + 2;
+        return rand.nextInt(11) + 2;
     }
 
     /**
-     * Ajoute un int dans un tableau
+     * Crée un nouveau tableau avec un int d'ajouté
      *
-     * @param tab le tableau qu'on ajoute à
+     * @param tab le tableau
      * @param i   le int qu'on ajoute
      * @return le tableau avec l'élément ajoutée
      */
@@ -64,7 +75,7 @@ public class Main {
     }
 
     /**
-     * Liste de tous les résultats
+     * Crée une liste de tous les résultats
      *
      * @param tab le tableau de données
      * @return string contenant tous les éléments formatées
@@ -90,7 +101,7 @@ public class Main {
         double moy = 0; // la moyenne à retourner
 
         for (int e : tab) {
-            moy = moy + e;
+            moy += e;
         }
 
         return (moy / tab.length);
@@ -109,7 +120,7 @@ public class Main {
 
         do {
             try {
-                System.out.print(ANSI_RESET + "Voulez-vous rejouer encore (o/n) ? ");
+                System.out.print(RESET + "Voulez-vous rejouer encore (o/n) ? ");
                 c = Character.toLowerCase(scan.next().charAt(0));
 
                 if (c == 'o' || c == 'n') {
@@ -146,38 +157,37 @@ public class Main {
         int partieWin; // nombre de partie gagnée
         int partieLoss; // nombre de partie perdue
         int[] tabResult; // tableau des résultats
-        boolean enJeu; // si le joueur est en jeu
-        boolean valid; // si l'entrée est valid
+        boolean veutRejouer; // si le joueur est en jeu
+        boolean estValid; // si l'entrée est valid
         Scanner scan = new Scanner(System.in);
 
         partieTotal = 0;
         partieWin = 0;
         partieLoss = 0;
-        tabResult = new int[]{9, 8, 10
-        };
+        tabResult = new int[]{};
 
         do {
             table = choisirTable();
             nbResult = 10;
             for (int i = 1; i <= 10; i++) {
                 nbRand = genererNbAleatoire();
-                valid = false;
+                estValid = false;
 
                 do {
                     try {
-                        System.out.print(ANSI_RESET + "(Essais: " + i + "/10) " + table + " * " + nbRand + " = ");
+                        System.out.print(RESET + "(Essais: " + i + "/10) " + table + " * " + nbRand + " = ");
                         nbEssaie = scan.nextInt();
-                        valid = true;
+                        estValid = true;
 
                         if (table * nbRand != nbEssaie) {
-                            System.out.println(ANSI_RED + table + " * " + nbRand + " = " + table * nbRand);
+                            System.out.println(RED + table + " * " + nbRand + " = " + table * nbRand);
                             nbResult--;
                         }
 
                     } catch (InputMismatchException e) {
                         scan.next();
                     }
-                } while (!valid);
+                } while (!estValid);
             }
 
             partieTotal++;
@@ -185,19 +195,19 @@ public class Main {
 
             if (nbResult < 9) {
                 partieLoss++;
-                System.out.println(ANSI_BLUE + "\n-> Vous avez perdu! " + nbResult + " / 10");
+                System.out.println(BLUE + "\n-> Vous avez perdu! " + nbResult + " / 10");
             } else {
                 partieWin++;
-                System.out.println(ANSI_BLUE + "\n-> Vous avez gagnée! " + nbResult + " / 10");
+                System.out.println(BLUE + "\n-> Vous avez gagnée! " + nbResult + " / 10");
             }
 
-            System.out.println(ANSI_BLUE + "\nNombre de parties jouées: " + partieTotal);
-            System.out.println(ANSI_BLUE + "Nombre de parties gagnées: " + partieWin);
-            System.out.println(ANSI_BLUE + "Nombre de parties perdues: " + partieLoss);
-            System.out.println(ANSI_BLUE + "Résultat de toutes les parties jouées: " + statsTableau(tabResult));
-            System.out.println(ANSI_BLUE + "Moyenne des résultats: " + enPourcentage(moyenneTableau(tabResult), 10) + "\n");
+            System.out.println(BLUE + "\nNombre de parties jouées: " + partieTotal);
+            System.out.println(BLUE + "Nombre de parties gagnées: " + partieWin);
+            System.out.println(BLUE + "Nombre de parties perdues: " + partieLoss);
+            System.out.println(BLUE + "Résultat de toutes les parties jouées: " + statsTableau(tabResult));
+            System.out.println(BLUE + "Moyenne des résultats: " + enPourcentage(moyenneTableau(tabResult), 10) + "\n");
 
-            enJeu = validerRejouer();
-        } while (enJeu);
+            veutRejouer = validerRejouer();
+        } while (veutRejouer);
     }
 }
