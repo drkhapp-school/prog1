@@ -281,7 +281,7 @@ public class ViewTP3 extends JFrame {
         String motCourt;// plus court mot
         String motLong; // plus long mot
 
-        if (tabString.length == 0) {
+        if (tabString[0].equals("")) {
             message = "Aucun mots d'extrait.";
         } else {
             motCourt = sShorter(tabString);
@@ -300,7 +300,7 @@ public class ViewTP3 extends JFrame {
         int nbrGrand; // plus grand nombre
 
         if (tabInt.length == 0) {
-            message = "Aucun nombre d'extrait.";
+            message = "Aucun nombres d'extrait.";
         } else {
             nbrPetit = min(tabInt);
             nbrGrand = max(tabInt);
